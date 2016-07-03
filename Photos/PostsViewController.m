@@ -10,6 +10,7 @@
 #import "PostsCollectionViewCell.h"
 #import "NXOAuth2.h"
 #import "AppDelegate.h"
+#import <SAMCache/SAMCache.h>
 
 @interface PostsViewController ()
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -84,7 +85,7 @@
             return;
         }
         // NSString *imgURLStr = pkg[@"data"][@"images"][@"standard_resolution"][@"url"];
-        NSArray *photosUrlArr = [pkg valueForKeyPath:@"data.images.low_resolution.url"];
+        NSArray *photosUrlArr = [pkg valueForKeyPath:@"data.images.thumbnail.url"];
         self.tableData = [NSMutableArray arrayWithArray:photosUrlArr];
         
 //        [[session dataTaskWithURL:imageURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -120,14 +121,31 @@
     
     NSURLSession *session = [NSURLSession sharedSession];
     NSURL *url = [NSURL URLWithString:[self.tableData objectAtIndex:indexPath.row]];
+//    NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url];
+//    NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+//        NSData *imgData = [[NSData alloc]initWithContentsOfURL:location];
+//        UIImage *image = [[UIImage alloc]initWithData:imgData];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            cell.postImageView.image = image;
+//            
+//                    });
+//    }];
+//    [task resume];
+    NSString *key = [[NSString alloc]initWithFormat:@"%ld-thumbnail", indexPath.row];
+    UIImage *photo = [[SAMCache sharedCache]imageForKey:key];
+    if(photo) {
+        cell.postImageView.image = photo;
+    }else{
     [[session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
+        UIImage *image = [[UIImage alloc]initWithData:data];
+        [[SAMCache sharedCache]setImage:image forKey:key];
         dispatch_async(dispatch_get_main_queue(), ^{
-            cell.postImageView.image = [UIImage imageWithData:data];
+            cell.postImageView.image = image;
 
         });
     }]resume];
-    
+    }
     return cell;
     
 }
