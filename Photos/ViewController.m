@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *logoutButton;
 @property (weak, nonatomic) IBOutlet UIButton *refreshButton;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *fullnameLabel;
 
 @end
 
@@ -103,8 +105,8 @@
             //
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.imageView.image = [UIImage imageWithData:data];
-               // self.usernameLabel.text = [NSString stringWithFormat:@"Welcome, %@!", usernameStr];
-              //  self.fullnameLabel.text = fullnameStr;
+               self.usernameLabel.text = [NSString stringWithFormat:@"Welcome, %@!", usernameStr];
+               self.fullnameLabel.text = fullnameStr;
             });
         }]resume];
         
