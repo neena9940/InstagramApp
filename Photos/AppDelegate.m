@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "NXOAuth2.h"
 
 @interface AppDelegate ()
 
@@ -17,9 +18,20 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [[NXOAuth2AccountStore sharedStore]
+     setClientID:@"1505d46fe223488caf41520c8b25c35b"    secret:@"02f081945451485fad9191cc30f1e172"
+     scope:[NSSet setWithObjects:@"likes", @"relationships",@"follower_list", @"comments", @"public_content", nil]
+     authorizationURL:[NSURL URLWithString:@"https://api.instagram.com/oauth/authorize"]
+     tokenURL:[NSURL URLWithString:@"https://api.instagram.com/oauth/access_token"]
+     redirectURL:[NSURL URLWithString:@"scheme://greonlineclass.com"] keyChainGroup:@""
+     forAccountType:@"Instagram"];
+
     return YES;
 }
-
+-(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
+    NSLog(@"We received a callback!");
+    return [[NXOAuth2AccountStore sharedStore]handleRedirectURL:url];
+}
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
