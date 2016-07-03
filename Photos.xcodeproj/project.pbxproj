@@ -20,6 +20,8 @@
 		B44313161D29113000D21EC7 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B44313151D29113000D21EC7 /* Roboto-Medium.ttf */; };
 		B44313191D29148C00D21EC7 /* PostsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B44313181D29148C00D21EC7 /* PostsViewController.m */; };
 		B443131E1D291C0F00D21EC7 /* PostsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B443131C1D291C0F00D21EC7 /* PostsCollectionViewCell.m */; };
+		B44313291D294DB400D21EC7 /* PostsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B44313281D294DB400D21EC7 /* PostsDetailViewController.m */; };
+		B443132C1D294F1B00D21EC7 /* PostsDetailCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B443132B1D294F1B00D21EC7 /* PostsDetailCollectionViewCell.m */; };
 		E980B3C05DBBD86FEA1F6F8C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C990CD14D11259DAAFE98462 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +69,10 @@
 		B44313181D29148C00D21EC7 /* PostsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostsViewController.m; sourceTree = "<group>"; };
 		B443131B1D291C0F00D21EC7 /* PostsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PostsCollectionViewCell.h; path = ../PostsCollectionViewCell.h; sourceTree = "<group>"; };
 		B443131C1D291C0F00D21EC7 /* PostsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PostsCollectionViewCell.m; path = ../PostsCollectionViewCell.m; sourceTree = "<group>"; };
+		B44313271D294DB400D21EC7 /* PostsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostsDetailViewController.h; sourceTree = "<group>"; };
+		B44313281D294DB400D21EC7 /* PostsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostsDetailViewController.m; sourceTree = "<group>"; };
+		B443132A1D294F1B00D21EC7 /* PostsDetailCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostsDetailCollectionViewCell.h; sourceTree = "<group>"; };
+		B443132B1D294F1B00D21EC7 /* PostsDetailCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostsDetailCollectionViewCell.m; sourceTree = "<group>"; };
 		C990CD14D11259DAAFE98462 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF1B9FB4797725345034CA02 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -145,6 +151,7 @@
 				B44313201D2920CC00D21EC7 /* launch view */,
 				B44313231D29212600D21EC7 /* landing page view */,
 				B44313211D2920E700D21EC7 /* posts view */,
+				B44313261D294D8900D21EC7 /* posts detail view */,
 				B44313221D29210400D21EC7 /* story board */,
 				B44313251D29215C00D21EC7 /* core data */,
 				B44312D91D28FE8D00D21EC7 /* Supporting Files */,
@@ -241,6 +248,17 @@
 				B44312E51D28FE8D00D21EC7 /* Photos.xcdatamodeld */,
 			);
 			name = "core data";
+			sourceTree = "<group>";
+		};
+		B44313261D294D8900D21EC7 /* posts detail view */ = {
+			isa = PBXGroup;
+			children = (
+				B44313271D294DB400D21EC7 /* PostsDetailViewController.h */,
+				B44313281D294DB400D21EC7 /* PostsDetailViewController.m */,
+				B443132A1D294F1B00D21EC7 /* PostsDetailCollectionViewCell.h */,
+				B443132B1D294F1B00D21EC7 /* PostsDetailCollectionViewCell.m */,
+			);
+			name = "posts detail view";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -426,6 +444,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B44312E71D28FE8D00D21EC7 /* Photos.xcdatamodeld in Sources */,
+				B443132C1D294F1B00D21EC7 /* PostsDetailCollectionViewCell.m in Sources */,
+				B44313291D294DB400D21EC7 /* PostsDetailViewController.m in Sources */,
 				B44312E11D28FE8D00D21EC7 /* ViewController.m in Sources */,
 				B44313191D29148C00D21EC7 /* PostsViewController.m in Sources */,
 				B443131E1D291C0F00D21EC7 /* PostsCollectionViewCell.m in Sources */,
