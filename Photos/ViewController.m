@@ -28,6 +28,13 @@
 
 }
 - (IBAction)logoutButtonPressed:(id)sender {
+    NXOAuth2AccountStore *share = [NXOAuth2AccountStore sharedStore];
+    NSArray *instagramAccounts = [share accountsWithAccountType:@"Instagram"];
+    for(id acct in instagramAccounts){
+        [share removeAccount:acct];
+        
+    }
+
 }
 - (IBAction)refreshButtonPressed:(id)sender {
 }
