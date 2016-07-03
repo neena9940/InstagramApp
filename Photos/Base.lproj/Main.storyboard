@@ -139,14 +139,33 @@
                         <outlet property="logoutButton" destination="G77-uD-Xda" id="HMe-iv-uYG"/>
                         <outlet property="refreshButton" destination="MMP-ls-7Nf" id="rYU-S3-UCW"/>
                         <outlet property="usernameLabel" destination="fk1-2z-4Aw" id="M9w-mZ-3Mn"/>
-                        <segue destination="6pv-bV-Yw1" kind="modal" identifier="showPosts" id="TlM-sr-ehQ"/>
+                        <segue destination="MMZ-hZ-0fY" kind="modal" identifier="showPosts" id="Tl5-oq-jF3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1360" y="286"/>
+            <point key="canvasLocation" x="1405" y="291"/>
         </scene>
-        <!--Posts View Controller-->
+        <!--Tab Bar Controller-->
+        <scene sceneID="AzO-9j-x5e">
+            <objects>
+                <tabBarController id="MMZ-hZ-0fY" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="vAR-Nb-2e0"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="kNf-2z-zyZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="tto-ku-Mfx" kind="relationship" relationship="viewControllers" id="2Gq-3q-4v3"/>
+                        <segue destination="6pv-bV-Yw1" kind="relationship" relationship="viewControllers" id="Ymw-Lk-rSl"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CSq-73-7XZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1802" y="286"/>
+        </scene>
+        <!--Grid-->
         <scene sceneID="lL6-s5-x8o">
             <objects>
                 <viewController id="tto-ku-Mfx" customClass="PostsViewController" sceneMemberID="viewController">
@@ -168,7 +187,7 @@
                                     <constraint firstAttribute="width" constant="7" id="Tgu-eT-vUn"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e9w-gQ-D71">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e9w-gQ-D71">
                                 <rect key="frame" x="1" y="1" width="50" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="mvn-Ih-S8J"/>
@@ -180,7 +199,7 @@
                                     <action selector="backButtonPressed:" destination="tto-ku-Mfx" eventType="touchUpInside" id="VaW-w7-yzI"/>
                                 </connections>
                             </button>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PVY-HR-wsF">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PVY-HR-wsF">
                                 <rect key="frame" x="0.0" y="50" width="320" height="518"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7J6-AH-9Lz">
                                     <size key="itemSize" width="100" height="150"/>
@@ -236,6 +255,7 @@
                             <constraint firstItem="PVY-HR-wsF" firstAttribute="top" secondItem="lNZ-cK-2eA" secondAttribute="bottom" id="qdS-U1-5Zg"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Grid" id="uhf-ZG-8IO"/>
                     <navigationItem key="navigationItem" id="2hw-u3-ZtN"/>
                     <connections>
                         <outlet property="collectionView" destination="PVY-HR-wsF" id="FOp-Te-lZJ"/>
@@ -244,9 +264,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gPU-Lk-1sL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1701" y="286"/>
+            <point key="canvasLocation" x="2279" y="103"/>
         </scene>
-        <!--Posts Detail View Controller-->
+        <!--List-->
         <scene sceneID="O2r-WZ-6r9">
             <objects>
                 <viewController id="6pv-bV-Yw1" customClass="PostsDetailViewController" sceneMemberID="viewController">
@@ -351,13 +371,14 @@
                             <constraint firstItem="6Qm-xq-q4F" firstAttribute="leading" secondItem="WeS-As-GWZ" secondAttribute="leading" id="stC-z3-7de"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="List" id="cn9-Ut-zYN"/>
                     <connections>
                         <outlet property="collectionView" destination="6Qm-xq-q4F" id="6NA-6k-v9L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wHR-Zc-IHc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2079" y="286"/>
+            <point key="canvasLocation" x="2279" y="740"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TOG-iv-zlg">
