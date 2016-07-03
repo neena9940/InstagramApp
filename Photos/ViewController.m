@@ -58,6 +58,7 @@
     NXOAuth2Account *acct = instagramAccounts[0];
     NSString *token = acct.accessToken.accessToken;
     //Profile
+   // https://api.instagram.com/v1/users/self/media/recent/?access_token=
     //NSString *urlString = [@"https://api.instagram.com/v1/users/self/?access_token=" stringByAppendingString:token];
     //Recent Liked Media
     NSString *urlString = [@"https://api.instagram.com/v1/users/self/?access_token=" stringByAppendingString:token];

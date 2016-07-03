@@ -16,6 +16,9 @@
 		B44312EC1D28FE8D00D21EC7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B44312EA1D28FE8D00D21EC7 /* LaunchScreen.storyboard */; };
 		B44312F71D28FE8D00D21EC7 /* PhotosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B44312F61D28FE8D00D21EC7 /* PhotosTests.m */; };
 		B44313021D28FE8D00D21EC7 /* PhotosUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B44313011D28FE8D00D21EC7 /* PhotosUITests.m */; };
+		B44313121D290FB100D21EC7 /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B44313111D290FB100D21EC7 /* LaunchViewController.m */; };
+		B44313141D29112700D21EC7 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B44313131D29112700D21EC7 /* Roboto-Light.ttf */; };
+		B44313161D29113000D21EC7 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B44313151D29113000D21EC7 /* Roboto-Medium.ttf */; };
 		E980B3C05DBBD86FEA1F6F8C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C990CD14D11259DAAFE98462 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +59,10 @@
 		B44313011D28FE8D00D21EC7 /* PhotosUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotosUITests.m; sourceTree = "<group>"; };
 		B44313031D28FE8D00D21EC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B443130F1D28FEE000D21EC7 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		B44313101D290FB100D21EC7 /* LaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchViewController.h; sourceTree = "<group>"; };
+		B44313111D290FB100D21EC7 /* LaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchViewController.m; sourceTree = "<group>"; };
+		B44313131D29112700D21EC7 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
+		B44313151D29113000D21EC7 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		C990CD14D11259DAAFE98462 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF1B9FB4797725345034CA02 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,6 +140,8 @@
 				B44312DD1D28FE8D00D21EC7 /* AppDelegate.m */,
 				B44312DF1D28FE8D00D21EC7 /* ViewController.h */,
 				B44312E01D28FE8D00D21EC7 /* ViewController.m */,
+				B44313101D290FB100D21EC7 /* LaunchViewController.h */,
+				B44313111D290FB100D21EC7 /* LaunchViewController.m */,
 				B44312E21D28FE8D00D21EC7 /* Main.storyboard */,
 				B44312E81D28FE8D00D21EC7 /* Assets.xcassets */,
 				B44312EA1D28FE8D00D21EC7 /* LaunchScreen.storyboard */,
@@ -146,6 +155,8 @@
 		B44312D91D28FE8D00D21EC7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B44313151D29113000D21EC7 /* Roboto-Medium.ttf */,
+				B44313131D29112700D21EC7 /* Roboto-Light.ttf */,
 				B44312DA1D28FE8D00D21EC7 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -275,8 +286,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B44313161D29113000D21EC7 /* Roboto-Medium.ttf in Resources */,
 				B44312EC1D28FE8D00D21EC7 /* LaunchScreen.storyboard in Resources */,
 				B44312E91D28FE8D00D21EC7 /* Assets.xcassets in Resources */,
+				B44313141D29112700D21EC7 /* Roboto-Light.ttf in Resources */,
 				B44312E41D28FE8D00D21EC7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -353,6 +366,7 @@
 				B44312E71D28FE8D00D21EC7 /* Photos.xcdatamodeld in Sources */,
 				B44312E11D28FE8D00D21EC7 /* ViewController.m in Sources */,
 				B44312DE1D28FE8D00D21EC7 /* AppDelegate.m in Sources */,
+				B44313121D290FB100D21EC7 /* LaunchViewController.m in Sources */,
 				B44312DB1D28FE8D00D21EC7 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
