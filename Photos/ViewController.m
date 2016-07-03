@@ -30,26 +30,6 @@
 }
 - (IBAction)loginButtonPressed:(id)sender {
     [[NXOAuth2AccountStore sharedStore]requestAccessToAccountWithType:@"Instagram"];
-    self.loginButton.enabled = false;
-    self.logoutButton.enabled = true;
-    self.refreshButton.enabled = true;
-
-
-}
-- (IBAction)logoutButtonPressed:(id)sender {
-    NXOAuth2AccountStore *share = [NXOAuth2AccountStore sharedStore];
-    NSArray *instagramAccounts = [share accountsWithAccountType:@"Instagram"];
-    for(id acct in instagramAccounts){
-        [share removeAccount:acct];
-        
-    }
-    self.loginButton.enabled = true;
-    self.logoutButton.enabled = false;
-    self.refreshButton.enabled = false;
-
-
-}
-- (IBAction)refreshButtonPressed:(id)sender {
     NSArray *instagramAccounts = [[NXOAuth2AccountStore sharedStore] accountsWithAccountType:@"Instagram"];
     if ([instagramAccounts count] == 0){
         NSLog(@"Warning %ld instagram accounts logged in.", (long)[instagramAccounts count]);
@@ -58,7 +38,7 @@
     NXOAuth2Account *acct = instagramAccounts[0];
     NSString *token = acct.accessToken.accessToken;
     //Profile
-   // https://api.instagram.com/v1/users/self/media/recent/?access_token=
+    // https://api.instagram.com/v1/users/self/media/recent/?access_token=
     //NSString *urlString = [@"https://api.instagram.com/v1/users/self/?access_token=" stringByAppendingString:token];
     //Recent Liked Media
     NSString *urlString = [@"https://api.instagram.com/v1/users/self/?access_token=" stringByAppendingString:token];
@@ -106,13 +86,36 @@
             //
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.imageView.image = [UIImage imageWithData:data];
-               self.usernameLabel.text = [NSString stringWithFormat:@"Welcome, %@!", usernameStr];
-               self.fullnameLabel.text = fullnameStr;
+                self.usernameLabel.text = [NSString stringWithFormat:@"Welcome, %@!", usernameStr];
+                self.fullnameLabel.text = fullnameStr;
             });
         }]resume];
         
     }]resume];
 
+    self.loginButton.enabled = false;
+    self.logoutButton.enabled = true;
+    self.refreshButton.enabled = true;
+
+
+}
+- (IBAction)logoutButtonPressed:(id)sender {
+    NXOAuth2AccountStore *share = [NXOAuth2AccountStore sharedStore];
+    NSArray *instagramAccounts = [share accountsWithAccountType:@"Instagram"];
+    for(id acct in instagramAccounts){
+        [share removeAccount:acct];
+        
+    }
+    self.loginButton.enabled = true;
+    self.logoutButton.enabled = false;
+    self.refreshButton.enabled = false;
+
+
+}
+- (IBAction)refreshButtonPressed:(id)sender {
+    [self performSegueWithIdentifier:@"showPosts" sender:self];
+
+    
 }
 
 - (void)didReceiveMemoryWarning {
