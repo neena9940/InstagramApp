@@ -9,6 +9,7 @@
 #import "PostsViewController.h"
 #import "PostsCollectionViewCell.h"
 #import "NXOAuth2.h"
+#import "AppDelegate.h"
 
 @interface PostsViewController ()
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -24,6 +25,13 @@
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.backgroundColor = [UIColor clearColor];
+    
+    [self.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Roboto-Medium" size:14],UITextAttributeFont, nil] forState:UIControlStateNormal];
+    UITabBarController *MyTabController = (UITabBarController *)((AppDelegate*) [[UIApplication sharedApplication] delegate]).window.rootViewController;
+    MyTabController = self.tabBarController;
+    [MyTabController setSelectedIndex:1];
+    [MyTabController setSelectedIndex:0];
+
     
 //    UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cover.png"]];
 //    [tempImageView setFrame:self.collectionView.frame];
@@ -76,7 +84,7 @@
             return;
         }
         // NSString *imgURLStr = pkg[@"data"][@"images"][@"standard_resolution"][@"url"];
-        NSArray *photosUrlArr = [pkg valueForKeyPath:@"data.images.standard_resolution.url"];
+        NSArray *photosUrlArr = [pkg valueForKeyPath:@"data.images.low_resolution.url"];
         self.tableData = [NSMutableArray arrayWithArray:photosUrlArr];
         
 //        [[session dataTaskWithURL:imageURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
