@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -14,13 +15,70 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="R7m-nx-Uce">
+                                <rect key="frame" x="0.0" y="105" width="320" height="315"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="320" id="BIH-ea-EKh"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="Dqo-JV-nb4"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="315" id="IW0-Tb-ej0"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="315" id="ONj-WB-0Uh"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="320" id="RHQ-Ij-qLK"/>
+                                    <constraint firstAttribute="height" constant="315" id="ja0-L8-bFx"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="315" id="neY-rj-Cai"/>
+                                    <constraint firstAttribute="width" constant="320" id="wDA-Sw-KhD"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MMP-ls-7Nf">
+                                <rect key="frame" x="113" y="493" width="94" height="30"/>
+                                <state key="normal" title="Refresh"/>
+                                <connections>
+                                    <action selector="refreshButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="raT-l5-8yr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7k6-dM-V7g">
+                                <rect key="frame" x="20" y="18" width="94" height="30"/>
+                                <state key="normal" title="Log In"/>
+                                <connections>
+                                    <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eXW-Ll-Pwf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G77-uD-Xda">
+                                <rect key="frame" x="206" y="18" width="94" height="30"/>
+                                <state key="normal" title="Log Out"/>
+                                <connections>
+                                    <action selector="logoutButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="D9f-ga-7XQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="MMP-ls-7Nf" firstAttribute="top" secondItem="R7m-nx-Uce" secondAttribute="bottom" constant="83" id="5Om-sl-dcE"/>
+                            <constraint firstItem="R7m-nx-Uce" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Svf-TN-Vi6"/>
+                            <constraint firstItem="MMP-ls-7Nf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="93" id="Vwh-9u-7jK"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="MMP-ls-7Nf" secondAttribute="trailing" constant="93" id="YU8-eV-Q8Q"/>
+                            <constraint firstItem="G77-uD-Xda" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="fC8-wi-0PW"/>
+                            <constraint firstItem="7k6-dM-V7g" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="18" id="m9L-4Y-RNS"/>
+                            <constraint firstItem="G77-uD-Xda" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="18" id="sAT-X5-gI2"/>
+                            <constraint firstItem="7k6-dM-V7g" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="xPX-wN-d9V"/>
+                            <constraint firstItem="R7m-nx-Uce" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="yJG-2X-fqT"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="R7m-nx-Uce" id="bCJ-0x-Odv"/>
+                        <outlet property="loginButton" destination="7k6-dM-V7g" id="CFH-vG-VxN"/>
+                        <outlet property="logoutButton" destination="G77-uD-Xda" id="HMe-iv-uYG"/>
+                        <outlet property="refreshButton" destination="MMP-ls-7Nf" id="rYU-S3-UCW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="202.66666666666666" y="286.36666666666667"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="default" width="80" height="80"/>
+    </resources>
 </document>
