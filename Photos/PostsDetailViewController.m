@@ -71,7 +71,6 @@
             NSLog(@"Error! Couldn't parse response! %@", parseError);
             return;
         }
-        // NSString *imgURLStr = pkg[@"data"][@"images"][@"standard_resolution"][@"url"];
         NSArray *photosUrlArr = [pkg valueForKeyPath:@"data.images.low_resolution.url"];
         for(int i=0; i< photosUrlArr.count;i++) {
             NSArray *partsArr = [photosUrlArr[i] componentsSeparatedByString:@"/"];
@@ -144,8 +143,6 @@
             NSLog(@"saved successfully in %@",[documentsDirectoryPath stringByAppendingPathComponent:[self.idsArr objectAtIndex:indexPath.row]] );
 
         }else{
-            // [self.booksCollectionView reloadData];
-            
             // file exist
             NSLog(@"file exists");
             

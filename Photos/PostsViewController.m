@@ -171,9 +171,7 @@
                 //save Image From URL
                  [data writeToFile:[documentsDirectoryPath stringByAppendingPathComponent:[self.idsArr objectAtIndex:indexPath.row]] options:NSAtomicWrite error:&error];
                  NSLog(@"saved successfully in %@",[documentsDirectoryPath stringByAppendingPathComponent:[self.idsArr objectAtIndex:indexPath.row]] );
-            }else{
-                    // [self.booksCollectionView reloadData];
-                    
+            }else{                    
                     // file exist
                     NSLog(@"file exists");
                     

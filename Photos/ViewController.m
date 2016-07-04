@@ -58,9 +58,7 @@
     
 
 }
-//-(void)viewDidAppear:(BOOL)animated{
-//    self.refreshButton.enabled = true;
-//}
+
 - (IBAction)loginButtonPressed:(id)sender {
     [[NXOAuth2AccountStore sharedStore]requestAccessToAccountWithType:@"Instagram"];
     NSArray *instagramAccounts = [[NXOAuth2AccountStore sharedStore] accountsWithAccountType:@"Instagram"];
@@ -71,23 +69,12 @@
 
     NXOAuth2Account *acct = instagramAccounts[0];
     NSString *token = acct.accessToken.accessToken;
-    //Profile
-    // https://api.instagram.com/v1/users/self/media/recent/?access_token=
-    //NSString *urlString = [@"https://api.instagram.com/v1/users/self/?access_token=" stringByAppendingString:token];
-    //Recent Liked Media
     NSString *urlString = [@"https://api.instagram.com/v1/users/self/?access_token=" stringByAppendingString:token];
     NSURL *url = [NSURL URLWithString:urlString];
     
     NSURLSession *session = [NSURLSession sharedSession];
     [[NSUserDefaults standardUserDefaults]setObject:@"NO" forKey:@"isFirstTime"];
-
     
-    //    NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url];
-    //    NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-    //        NSString *text = [[NSString alloc]initWithContentsOfURL:location encoding:NSUTF8StringEncoding error:nil];
-    //        NSLog(@"text: %@", text);
-    //    }];
-    //    [task resume];
     [[session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
         
@@ -110,7 +97,6 @@
             NSLog(@"Error! Couldn't parse response! %@", parseError);
             return;
         }
-        // NSString *imgURLStr = pkg[@"data"][@"images"][@"standard_resolution"][@"url"];
         NSString *imgURLStr = pkg[@"data"][@"profile_picture"];
         NSString *usernameStr = pkg[@"data"][@"username"];
         NSString *fullnameStr = pkg[@"data"][@"full_name"];
@@ -118,9 +104,7 @@
         [[NSUserDefaults standardUserDefaults]setObject:fullnameStr forKey:@"fullname"];
 
         NSURL *imageURL = [NSURL URLWithString:imgURLStr];
-        // NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
         
-        // self.imageView.image = [UIImage imageWithData:imageData];
         [[session dataTaskWithURL:imageURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             //
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -142,7 +126,6 @@
                     
                     [data writeToFile:[documentsDirectoryPath stringByAppendingPathComponent:@"profilePhoto"] options:NSAtomicWrite error:&error];
                 }else{
-                    // [self.booksCollectionView reloadData];
                     
                     // file exist
                     NSLog(@"file exists");
