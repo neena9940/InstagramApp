@@ -12,7 +12,7 @@
 		B44312E11D28FE8D00D21EC7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B44312E01D28FE8D00D21EC7 /* ViewController.m */; };
 		B44312E41D28FE8D00D21EC7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B44312E21D28FE8D00D21EC7 /* Main.storyboard */; };
 		B44312E71D28FE8D00D21EC7 /* Photos.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B44312E51D28FE8D00D21EC7 /* Photos.xcdatamodeld */; };
-		B44312E91D28FE8D00D21EC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B44312E81D28FE8D00D21EC7 /* Assets.xcassets */; };
+		B44312E91D28FE8D00D21EC7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B44312E81D28FE8D00D21EC7 /* Images.xcassets */; };
 		B44312F71D28FE8D00D21EC7 /* PhotosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B44312F61D28FE8D00D21EC7 /* PhotosTests.m */; };
 		B44313021D28FE8D00D21EC7 /* PhotosUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B44313011D28FE8D00D21EC7 /* PhotosUITests.m */; };
 		B44313121D290FB100D21EC7 /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B44313111D290FB100D21EC7 /* LaunchViewController.m */; };
@@ -53,7 +53,7 @@
 		B44312E01D28FE8D00D21EC7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		B44312E31D28FE8D00D21EC7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B44312E61D28FE8D00D21EC7 /* Photos.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Photos.xcdatamodel; sourceTree = "<group>"; };
-		B44312E81D28FE8D00D21EC7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B44312E81D28FE8D00D21EC7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B44312ED1D28FE8D00D21EC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B44312F21D28FE8D00D21EC7 /* PhotosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B44312F61D28FE8D00D21EC7 /* PhotosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotosTests.m; sourceTree = "<group>"; };
@@ -166,7 +166,7 @@
 		B44312D91D28FE8D00D21EC7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B44312E81D28FE8D00D21EC7 /* Assets.xcassets */,
+				B44312E81D28FE8D00D21EC7 /* Images.xcassets */,
 				B44312ED1D28FE8D00D21EC7 /* Info.plist */,
 				B44313151D29113000D21EC7 /* Roboto-Medium.ttf */,
 				B44313131D29112700D21EC7 /* Roboto-Light.ttf */,
@@ -381,7 +381,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B44313161D29113000D21EC7 /* Roboto-Medium.ttf in Resources */,
-				B44312E91D28FE8D00D21EC7 /* Assets.xcassets in Resources */,
+				B44312E91D28FE8D00D21EC7 /* Images.xcassets in Resources */,
 				B44313141D29112700D21EC7 /* Roboto-Light.ttf in Resources */,
 				B44312E41D28FE8D00D21EC7 /* Main.storyboard in Resources */,
 			);
