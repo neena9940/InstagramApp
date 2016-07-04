@@ -8,6 +8,8 @@
     <customFonts key="customFonts">
         <mutableArray key="Roboto-Medium.ttf">
             <string>Roboto-Medium</string>
+            <string>Roboto-Medium</string>
+            <string>Roboto-Medium</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -86,13 +88,13 @@
                                     <action selector="logoutButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="D9f-ga-7XQ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fk1-2z-4Aw">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fk1-2z-4Aw">
                                 <rect key="frame" x="20" y="67" width="280" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="fullname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gO3-Jx-ZiM">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gO3-Jx-ZiM">
                                 <rect key="frame" x="20" y="441" width="280" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -237,6 +239,12 @@
                                     <outlet property="delegate" destination="tto-ku-Mfx" id="Yyd-H3-3dd"/>
                                 </connections>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Posts" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kZB-fe-bk7">
+                                <rect key="frame" x="108" y="18" width="105" height="21"/>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -247,12 +255,15 @@
                             <constraint firstItem="PVY-HR-wsF" firstAttribute="top" secondItem="8xp-0L-9tl" secondAttribute="bottom" constant="14" id="Ev4-Mv-lpV"/>
                             <constraint firstItem="PVY-HR-wsF" firstAttribute="bottom" secondItem="JBf-2N-nam" secondAttribute="top" id="Jz9-w0-wXA"/>
                             <constraint firstItem="e9w-gQ-D71" firstAttribute="top" secondItem="Zgg-gl-pVP" secondAttribute="topMargin" constant="1" id="PVa-zZ-oNm"/>
+                            <constraint firstItem="PVY-HR-wsF" firstAttribute="top" secondItem="kZB-fe-bk7" secondAttribute="bottom" constant="11" id="T5C-1X-xme"/>
                             <constraint firstItem="JBf-2N-nam" firstAttribute="top" secondItem="e9w-gQ-D71" secondAttribute="bottom" constant="492" id="VBi-IC-kMd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="kZB-fe-bk7" secondAttribute="trailing" constant="87" id="VcQ-Nj-L1f"/>
                             <constraint firstItem="PVY-HR-wsF" firstAttribute="trailing" secondItem="lNZ-cK-2eA" secondAttribute="trailing" id="aQa-UG-HGP"/>
                             <constraint firstItem="8xp-0L-9tl" firstAttribute="leading" secondItem="Zgg-gl-pVP" secondAttribute="leadingMargin" constant="-1" id="dgb-9F-lh9"/>
                             <constraint firstAttribute="trailing" secondItem="PVY-HR-wsF" secondAttribute="trailing" id="e3L-bf-WJV"/>
                             <constraint firstItem="e9w-gQ-D71" firstAttribute="leading" secondItem="Zgg-gl-pVP" secondAttribute="leadingMargin" constant="-15" id="my5-bs-6Wp"/>
                             <constraint firstItem="PVY-HR-wsF" firstAttribute="top" secondItem="lNZ-cK-2eA" secondAttribute="bottom" id="qdS-U1-5Zg"/>
+                            <constraint firstItem="kZB-fe-bk7" firstAttribute="leading" secondItem="e9w-gQ-D71" secondAttribute="trailing" constant="57" id="xl1-Yw-8Bp"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Grid" id="uhf-ZG-8IO">
@@ -305,7 +316,6 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="66" id="GbR-R6-Xet"/>
                                                     </constraints>
-                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
@@ -356,20 +366,29 @@
                                     <segue destination="BYZ-38-t0r" kind="modal" identifier="showHome" id="uxf-Fe-HxE"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Posts" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iLA-vr-vp7">
+                                <rect key="frame" x="108" y="18" width="105" height="21"/>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Kgn-Ju-6Fi" firstAttribute="top" secondItem="1Pi-pr-rwI" secondAttribute="topMargin" id="3zu-lO-Zos"/>
                             <constraint firstAttribute="trailingMargin" secondItem="6Qm-xq-q4F" secondAttribute="trailing" constant="-20" id="4gv-I9-Kap"/>
+                            <constraint firstItem="iLA-vr-vp7" firstAttribute="leading" secondItem="WeS-As-GWZ" secondAttribute="trailing" constant="57" id="5OX-Fy-sj6"/>
                             <constraint firstItem="WeS-As-GWZ" firstAttribute="top" secondItem="1Pi-pr-rwI" secondAttribute="topMargin" constant="1" id="ABE-rv-KBe"/>
                             <constraint firstItem="6Qm-xq-q4F" firstAttribute="top" secondItem="Kgn-Ju-6Fi" secondAttribute="bottom" id="Ip5-mx-fmI"/>
                             <constraint firstItem="SCJ-3n-SRV" firstAttribute="leading" secondItem="1Pi-pr-rwI" secondAttribute="leadingMargin" constant="-1" id="LqM-0g-1E7"/>
+                            <constraint firstItem="6Qm-xq-q4F" firstAttribute="top" secondItem="iLA-vr-vp7" secondAttribute="bottom" constant="11" id="TyP-3L-4A3"/>
                             <constraint firstItem="Nx8-4L-MWp" firstAttribute="top" secondItem="6Qm-xq-q4F" secondAttribute="bottom" id="U5n-p5-mET"/>
                             <constraint firstItem="Kgn-Ju-6Fi" firstAttribute="leading" secondItem="1Pi-pr-rwI" secondAttribute="leadingMargin" constant="-20" id="UWm-3A-0gj"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Kgn-Ju-6Fi" secondAttribute="trailing" constant="-20" id="WLM-ql-6N5"/>
                             <constraint firstItem="Nx8-4L-MWp" firstAttribute="top" secondItem="WeS-As-GWZ" secondAttribute="bottom" constant="492" id="bRr-0F-PHY"/>
                             <constraint firstItem="SCJ-3n-SRV" firstAttribute="top" secondItem="ng8-c0-H2b" secondAttribute="bottom" constant="1" id="e4j-EL-gh9"/>
                             <constraint firstItem="6Qm-xq-q4F" firstAttribute="top" secondItem="SCJ-3n-SRV" secondAttribute="bottom" constant="14" id="fWW-ZB-XMo"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="iLA-vr-vp7" secondAttribute="trailing" constant="87" id="pXt-we-Rbx"/>
                             <constraint firstItem="6Qm-xq-q4F" firstAttribute="leading" secondItem="1Pi-pr-rwI" secondAttribute="leadingMargin" constant="-19" id="r5p-hG-Hg5"/>
                             <constraint firstItem="6Qm-xq-q4F" firstAttribute="leading" secondItem="WeS-As-GWZ" secondAttribute="leading" id="stC-z3-7de"/>
                         </constraints>
@@ -388,7 +407,7 @@
         <!--Navigation Controller-->
         <scene sceneID="TOG-iv-zlg">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dR1-zX-yZl" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="dR1-zX-yZl" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Yhf-dV-TkQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -411,6 +430,6 @@
         <image name="insta" width="229" height="220"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="uxf-Fe-HxE"/>
+        <segue reference="Opz-VZ-PLu"/>
     </inferredMetricsTieBreakers>
 </document>
