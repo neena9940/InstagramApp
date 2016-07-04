@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *fullnameLabel;
+@property (strong, nonatomic)NSString *isFirsttime;
 
 @end
 
@@ -24,8 +25,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self.logoutButton.enabled = false;
-    self.refreshButton.enabled = false;
+    
+    
+    self.isFirsttime = [[NSUserDefaults standardUserDefaults]objectForKey:@"isFirstTime"];
+    if([self.isFirsttime isEqualToString:@"NO"] == NO){
+        self.logoutButton.enabled = false;
+        self.refreshButton.enabled = false;
+    }else{
+        self.loginButton.enabled = false;
+        self.logoutButton.enabled = true;
+        self.refreshButton.enabled = true;
+    }
+    
 
 }
 -(void)viewDidAppear:(BOOL)animated{
@@ -38,6 +49,8 @@
         NSLog(@"Warning %ld instagram accounts logged in.", (long)[instagramAccounts count]);
         return;
     }
+    [[NSUserDefaults standardUserDefaults]setObject:@"NO" forKey:@"isFirstTime"];
+
     NXOAuth2Account *acct = instagramAccounts[0];
     NSString *token = acct.accessToken.accessToken;
     //Profile
