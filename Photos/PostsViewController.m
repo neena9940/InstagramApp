@@ -15,11 +15,13 @@
 #import <UIImageView+AFNetworking.h>
 #import <sys/socket.h>
 #import <netinet/in.h>
+#import "ProgressHUD.h"
 
 @interface PostsViewController ()
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong,nonatomic)NSArray *tableData;
 @property (strong, nonatomic)NSMutableArray *idsArr;
+@property (strong, nonatomic)UIActivityIndicatorView *indicator;
 @end
 
 
@@ -33,6 +35,14 @@
     self.collectionView.backgroundColor = [UIColor clearColor];
     self.idsArr = [[NSMutableArray alloc]init];
     
+    self.indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    _indicator.hidesWhenStopped = YES;
+    _indicator.frame = CGRectMake(self.view.bounds.size.width/2 -15, 300, 30, 30);
+    _indicator.backgroundColor = [UIColor grayColor];
+    
+    [self.view addSubview:_indicator];
+    [_indicator startAnimating];
+
     [self.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Roboto-Medium" size:14],UITextAttributeFont, nil] forState:UIControlStateNormal];
     UITabBarController *MyTabController = (UITabBarController *)((AppDelegate*) [[UIApplication sharedApplication] delegate]).window.rootViewController;
     MyTabController = self.tabBarController;
@@ -152,7 +162,16 @@
 //    if(photo) {
 //        cell.postImageView.image = photo;
 //    }else{
-    
+//    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+//        indicator.hidesWhenStopped = YES;
+//        indicator.frame = CGRectMake(145, 300, 30, 30);
+//        indicator.backgroundColor = [UIColor grayColor];
+//    
+//    [self.view addSubview:indicator];
+//    [indicator startAnimating];
+
+    [ProgressHUD show:@"Please Wait ..." Interaction:NO];
+
     //Checking if the image is already saved in Documents
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
                                                          NSUserDomainMask, YES);
@@ -210,6 +229,8 @@
     }]resume];
     }
     
+    [ProgressHUD dismiss];
+    [_indicator stopAnimating];
     
     //download and save into Documents
     //NSFileManager *fileManager = [NSFileManager defaultManager];

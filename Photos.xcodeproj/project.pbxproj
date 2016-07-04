@@ -22,6 +22,7 @@
 		B443131E1D291C0F00D21EC7 /* PostsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B443131C1D291C0F00D21EC7 /* PostsCollectionViewCell.m */; };
 		B44313291D294DB400D21EC7 /* PostsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B44313281D294DB400D21EC7 /* PostsDetailViewController.m */; };
 		B443132C1D294F1B00D21EC7 /* PostsDetailCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B443132B1D294F1B00D21EC7 /* PostsDetailCollectionViewCell.m */; };
+		B48F0EF41D2A28B200C731F6 /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B48F0EF31D2A28B200C731F6 /* ProgressHUD.m */; };
 		E980B3C05DBBD86FEA1F6F8C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C990CD14D11259DAAFE98462 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,8 @@
 		B44313281D294DB400D21EC7 /* PostsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostsDetailViewController.m; sourceTree = "<group>"; };
 		B443132A1D294F1B00D21EC7 /* PostsDetailCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostsDetailCollectionViewCell.h; sourceTree = "<group>"; };
 		B443132B1D294F1B00D21EC7 /* PostsDetailCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostsDetailCollectionViewCell.m; sourceTree = "<group>"; };
+		B48F0EF21D2A28B200C731F6 /* ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressHUD.h; sourceTree = "<group>"; };
+		B48F0EF31D2A28B200C731F6 /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressHUD.m; sourceTree = "<group>"; };
 		C990CD14D11259DAAFE98462 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF1B9FB4797725345034CA02 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -153,6 +156,7 @@
 				B44313211D2920E700D21EC7 /* posts view */,
 				B44313261D294D8900D21EC7 /* posts detail view */,
 				B44313221D29210400D21EC7 /* story board */,
+				B48F0EEF1D2A27C400C731F6 /* libraries */,
 				B44313251D29215C00D21EC7 /* core data */,
 				B44312D91D28FE8D00D21EC7 /* Supporting Files */,
 			);
@@ -259,6 +263,15 @@
 				B443132B1D294F1B00D21EC7 /* PostsDetailCollectionViewCell.m */,
 			);
 			name = "posts detail view";
+			sourceTree = "<group>";
+		};
+		B48F0EEF1D2A27C400C731F6 /* libraries */ = {
+			isa = PBXGroup;
+			children = (
+				B48F0EF21D2A28B200C731F6 /* ProgressHUD.h */,
+				B48F0EF31D2A28B200C731F6 /* ProgressHUD.m */,
+			);
+			name = libraries;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -445,6 +458,7 @@
 			files = (
 				B44312E71D28FE8D00D21EC7 /* Photos.xcdatamodeld in Sources */,
 				B443132C1D294F1B00D21EC7 /* PostsDetailCollectionViewCell.m in Sources */,
+				B48F0EF41D2A28B200C731F6 /* ProgressHUD.m in Sources */,
 				B44313291D294DB400D21EC7 /* PostsDetailViewController.m in Sources */,
 				B44312E11D28FE8D00D21EC7 /* ViewController.m in Sources */,
 				B44313191D29148C00D21EC7 /* PostsViewController.m in Sources */,
