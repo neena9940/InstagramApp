@@ -11,10 +11,15 @@
 #import "NXOAuth2.h"
 #import "AppDelegate.h"
 #import <SAMCache/SAMCache.h>
+#import "AFNetworking/AFURLSessionManager.h"
+#import <UIImageView+AFNetworking.h>
+#import <sys/socket.h>
+#import <netinet/in.h>
 
 @interface PostsViewController ()
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong,nonatomic)NSArray *tableData;
+@property (strong, nonatomic)NSMutableArray *idsArr;
 @end
 
 
@@ -26,6 +31,7 @@
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.backgroundColor = [UIColor clearColor];
+    self.idsArr = [[NSMutableArray alloc]init];
     
     [self.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Roboto-Medium" size:14],UITextAttributeFont, nil] forState:UIControlStateNormal];
     UITabBarController *MyTabController = (UITabBarController *)((AppDelegate*) [[UIApplication sharedApplication] delegate]).window.rootViewController;
@@ -86,6 +92,14 @@
         }
         // NSString *imgURLStr = pkg[@"data"][@"images"][@"standard_resolution"][@"url"];
         NSArray *photosUrlArr = [pkg valueForKeyPath:@"data.images.thumbnail.url"];
+       // NSArray *idsArray = [pkg valueForKey:@"data.caption.id"];
+        for(int i=0; i< photosUrlArr.count;i++) {
+            NSArray *partsArr = [photosUrlArr[i] componentsSeparatedByString:@"/"];
+            NSArray * lastPart = [[partsArr lastObject] componentsSeparatedByString:@"?"];
+            [self.idsArr addObject:lastPart[0]];
+
+        }
+                //self.idsArr = [[NSArray alloc]initWithArray:idsArray];
         self.tableData = [NSMutableArray arrayWithArray:photosUrlArr];
         
 //        [[session dataTaskWithURL:imageURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -131,27 +145,136 @@
 //                    });
 //    }];
 //    [task resume];
-    NSString *key = [[NSString alloc]initWithFormat:@"%ld-thumbnail", indexPath.row];
-    UIImage *photo = [[SAMCache sharedCache]imageForKey:key];
-    if(photo) {
-        cell.postImageView.image = photo;
-    }else{
-    [[session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        
-        UIImage *image = [[UIImage alloc]initWithData:data];
-        [[SAMCache sharedCache]setImage:image forKey:key];
+    
+    
+//    NSString *key = [[NSString alloc]initWithFormat:@"%ld-thumbnail", indexPath.row];
+//    UIImage *photo = [[SAMCache sharedCache]imageForKey:key];
+//    if(photo) {
+//        cell.postImageView.image = photo;
+//    }else{
+    
+    //Checking if the image is already saved in Documents
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                         NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    NSString *imgUrlStr = [self.idsArr objectAtIndex:indexPath.row];
+    
+    NSString* path = [documentsDirectory stringByAppendingPathComponent:
+                      imgUrlStr];
+    UIImage* image = [UIImage imageWithContentsOfFile:path];
+    
+    if (image) {
         dispatch_async(dispatch_get_main_queue(), ^{
             cell.postImageView.image = image;
+             });
+        
+    } else {
+        //Download & Save the image
 
-        });
+    [[session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+       // if([self hasConnectivity]){
+
+        UIImage *image = [[UIImage alloc]initWithData:data];
+       // [[SAMCache sharedCache]setImage:image forKey:key];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            cell.postImageView.image = image;
+             });
+            
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            NSString * documentsDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSLog(@"doc: %@", documentsDirectoryPath);
+            
+            NSString *writablePath = [documentsDirectoryPath stringByAppendingPathComponent:[self.idsArr objectAtIndex:indexPath.row] ];
+            // NSError *error = nil;
+            if(![fileManager fileExistsAtPath:writablePath]){
+                // file doesn't exist
+                
+                NSLog(@"file doesn't exist");
+                //save Image From URL
+
+                 [data writeToFile:[documentsDirectoryPath stringByAppendingString:[self.idsArr objectAtIndex:indexPath.row]] options:NSAtomicWrite error:&error];
+            }else{
+                    // [self.booksCollectionView reloadData];
+                    
+                    // file exist
+                    NSLog(@"file exists");
+                    
+                }
+
+
+       
+     //   }
+    
+      
     }]resume];
     }
-    return cell;
+    
+    
+    //download and save into Documents
+    //NSFileManager *fileManager = [NSFileManager defaultManager];
+    //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+      //                                                   NSUserDomainMask, YES);
+    //NSString *documentsDirectory = [paths objectAtIndex:0];
+   
+    
+              return cell;
     
 }
+
+//}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (BOOL)hasConnectivity {
+    struct sockaddr_in zeroAddress;
+    bzero(&zeroAddress, sizeof(zeroAddress));
+    zeroAddress.sin_len = sizeof(zeroAddress);
+    zeroAddress.sin_family = AF_INET;
+    
+    SCNetworkReachabilityRef reachability = SCNetworkReachabilityCreateWithAddress(kCFAllocatorDefault, (const struct sockaddr*)&zeroAddress);
+    if(reachability != NULL) {
+        //NetworkStatus retVal = NotReachable;
+        SCNetworkReachabilityFlags flags;
+        if (SCNetworkReachabilityGetFlags(reachability, &flags)) {
+            if ((flags & kSCNetworkReachabilityFlagsReachable) == 0)
+            {
+                // if target host is not reachable
+                return NO;
+            }
+            
+            if ((flags & kSCNetworkReachabilityFlagsConnectionRequired) == 0)
+            {
+                // if target host is reachable and no connection is required
+                //  then we'll assume (for now) that your on Wi-Fi
+                return YES;
+            }
+            
+            
+            if ((((flags & kSCNetworkReachabilityFlagsConnectionOnDemand ) != 0) ||
+                 (flags & kSCNetworkReachabilityFlagsConnectionOnTraffic) != 0))
+            {
+                // ... and the connection is on-demand (or on-traffic) if the
+                //     calling application is using the CFSocketStream or higher APIs
+                
+                if ((flags & kSCNetworkReachabilityFlagsInterventionRequired) == 0)
+                {
+                    // ... and no [user] intervention is needed
+                    return YES;
+                }
+            }
+            
+            if ((flags & kSCNetworkReachabilityFlagsIsWWAN) == kSCNetworkReachabilityFlagsIsWWAN)
+            {
+                // ... but WWAN connections are OK if the calling application
+                //     is using the CFNetwork (CFSocketStream?) APIs.
+                return YES;
+            }
+        }
+    }
+    
+    return NO;
 }
 
 /*

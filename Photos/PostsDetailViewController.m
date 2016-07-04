@@ -11,9 +11,12 @@
 #import "PostsDetailCollectionViewCell.h"
 #import "AppDelegate.h"
 
+
 @interface PostsDetailViewController ()
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong,nonatomic)NSArray *tableData;
+@property (strong, nonatomic)NSMutableArray *idsArr;
+
 
 @end
 
@@ -22,6 +25,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.idsArr = [[NSMutableArray alloc]init];
+
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.backgroundColor = [UIColor clearColor];
@@ -79,6 +84,12 @@
         }
         // NSString *imgURLStr = pkg[@"data"][@"images"][@"standard_resolution"][@"url"];
         NSArray *photosUrlArr = [pkg valueForKeyPath:@"data.images.low_resolution.url"];
+        for(int i=0; i< photosUrlArr.count;i++) {
+            NSArray *partsArr = [photosUrlArr[i] componentsSeparatedByString:@"/"];
+            NSArray * lastPart = [[partsArr lastObject] componentsSeparatedByString:@"?"];
+            [self.idsArr addObject:lastPart[0]];
+            
+        }
         self.tableData = [NSMutableArray arrayWithArray:photosUrlArr];
         
         //        [[session dataTaskWithURL:imageURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -108,14 +119,54 @@
 
     NSURLSession *session = [NSURLSession sharedSession];
     NSURL *url = [NSURL URLWithString:[self.tableData objectAtIndex:indexPath.row]];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                         NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    NSString *imgUrlStr = [self.idsArr objectAtIndex:indexPath.row];
+    
+    NSString* path = [documentsDirectory stringByAppendingPathComponent:
+                      imgUrlStr];
+    UIImage* image = [UIImage imageWithContentsOfFile:path];
+    
+    if (image) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            cell.imageView.image = image;
+        });
+    }else{
+
     [[session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
+        
+        UIImage *image = [[UIImage alloc]initWithData:data];
+        // [[SAMCache sharedCache]setImage:image forKey:key];
         dispatch_async(dispatch_get_main_queue(), ^{
-            cell.imageView.image = [UIImage imageWithData:data];
-            
+            cell.imageView.image = image;
         });
+        
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSString * documentsDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSLog(@"doc: %@", documentsDirectoryPath);
+        
+        NSString *writablePath = [documentsDirectoryPath stringByAppendingPathComponent:[self.idsArr objectAtIndex:indexPath.row] ];
+        // NSError *error = nil;
+        if(![fileManager fileExistsAtPath:writablePath]){
+            // file doesn't exist
+            
+            NSLog(@"file doesn't exist");
+            //save Image From URL
+            
+            [data writeToFile:[documentsDirectoryPath stringByAppendingString:[self.idsArr objectAtIndex:indexPath.row]] options:NSAtomicWrite error:&error];
+        }else{
+            // [self.booksCollectionView reloadData];
+            
+            // file exist
+            NSLog(@"file exists");
+            
+        }
+        
     }]resume];
-
+    }
     
     return cell;
 }
