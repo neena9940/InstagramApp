@@ -63,21 +63,11 @@
 
     NXOAuth2Account *acct = instagramAccounts[0];
     NSString *token = acct.accessToken.accessToken;
-    //Profile
-    // https://api.instagram.com/v1/users/self/media/recent/?access_token=
-    //NSString *urlString = [@"https://api.instagram.com/v1/users/self/?access_token=" stringByAppendingString:token];
-    //Recent Liked Media
     NSString *urlString = [@"https://api.instagram.com/v1/users/self/media/recent/?access_token=" stringByAppendingString:token];
     NSURL *url = [NSURL URLWithString:urlString];
     
     NSURLSession *session = [NSURLSession sharedSession];
     
-    //    NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url];
-    //    NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-    //        NSString *text = [[NSString alloc]initWithContentsOfURL:location encoding:NSUTF8StringEncoding error:nil];
-    //        NSLog(@"text: %@", text);
-    //    }];
-    //    [task resume];
     [[session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
         
@@ -101,7 +91,7 @@
             return;
         }
         // NSString *imgURLStr = pkg[@"data"][@"images"][@"standard_resolution"][@"url"];
-        NSArray *photosUrlArr = [pkg valueForKeyPath:@"data.images.thumbnail.url"];
+        NSArray *photosUrlArr = [pkg valueForKeyPath:@"data.images.low_resolution.url"];
        // NSArray *idsArray = [pkg valueForKey:@"data.caption.id"];
         for(int i=0; i< photosUrlArr.count;i++) {
             NSArray *partsArr = [photosUrlArr[i] componentsSeparatedByString:@"/"];
@@ -111,15 +101,6 @@
         }
                 //self.idsArr = [[NSArray alloc]initWithArray:idsArray];
         self.tableData = [NSMutableArray arrayWithArray:photosUrlArr];
-        
-//        [[session dataTaskWithURL:imageURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-//            //
-//            dispatch_async(dispatch_get_main_queue(), ^{
-////                self.imageView.image = [UIImage imageWithData:data];
-////                self.usernameLabel.text = [NSString stringWithFormat:@"Welcome, %@!", usernameStr];
-////                self.fullnameLabel.text = fullnameStr;
-//            });
-//        }]resume];
         [self.collectionView reloadData];
     }]resume];
     
@@ -142,35 +123,10 @@
     static NSString *cellIdentifier = @"postCell";
     PostsCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     
-   // cell.postImageView.image = [UIImage imageNamed:@"insta"];
     
     NSURLSession *session = [NSURLSession sharedSession];
     NSURL *url = [NSURL URLWithString:[self.tableData objectAtIndex:indexPath.row]];
-//    NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url];
-//    NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-//        NSData *imgData = [[NSData alloc]initWithContentsOfURL:location];
-//        UIImage *image = [[UIImage alloc]initWithData:imgData];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            cell.postImageView.image = image;
-//            
-//                    });
-//    }];
-//    [task resume];
     
-    
-//    NSString *key = [[NSString alloc]initWithFormat:@"%ld-thumbnail", indexPath.row];
-//    UIImage *photo = [[SAMCache sharedCache]imageForKey:key];
-//    if(photo) {
-//        cell.postImageView.image = photo;
-//    }else{
-//    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-//        indicator.hidesWhenStopped = YES;
-//        indicator.frame = CGRectMake(145, 300, 30, 30);
-//        indicator.backgroundColor = [UIColor grayColor];
-//    
-//    [self.view addSubview:indicator];
-//    [indicator startAnimating];
-
     [ProgressHUD show:@"Please Wait ..." Interaction:NO];
 
     //Checking if the image is already saved in Documents
@@ -190,8 +146,8 @@
              });
         
     } else {
-        //Download & Save the image
-
+        
+    //Download & Save the image
     [[session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
        // if([self hasConnectivity]){
 
@@ -200,7 +156,8 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             cell.postImageView.image = image;
              });
-            
+        
+        //Saving Image in Documents
             NSFileManager *fileManager = [NSFileManager defaultManager];
             NSString * documentsDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         NSLog(@"doc: %@", documentsDirectoryPath);
@@ -212,8 +169,8 @@
                 
                 NSLog(@"file doesn't exist");
                 //save Image From URL
-
-                 [data writeToFile:[documentsDirectoryPath stringByAppendingString:[self.idsArr objectAtIndex:indexPath.row]] options:NSAtomicWrite error:&error];
+                 [data writeToFile:[documentsDirectoryPath stringByAppendingPathComponent:[self.idsArr objectAtIndex:indexPath.row]] options:NSAtomicWrite error:&error];
+                 NSLog(@"saved successfully in %@",[documentsDirectoryPath stringByAppendingPathComponent:[self.idsArr objectAtIndex:indexPath.row]] );
             }else{
                     // [self.booksCollectionView reloadData];
                     
@@ -222,10 +179,6 @@
                     
                 }
 
-
-       
-     //   }
-    
       
     }]resume];
     }
@@ -233,18 +186,11 @@
     [ProgressHUD dismiss];
     [_indicator stopAnimating];
     
-    //download and save into Documents
-    //NSFileManager *fileManager = [NSFileManager defaultManager];
-    //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
-      //                                                   NSUserDomainMask, YES);
-    //NSString *documentsDirectory = [paths objectAtIndex:0];
-   
-    
-              return cell;
+    return cell;
     
 }
 
-//}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -45,22 +45,11 @@
     
     NXOAuth2Account *acct = instagramAccounts[0];
     NSString *token = acct.accessToken.accessToken;
-    //Profile
-    // https://api.instagram.com/v1/users/self/media/recent/?access_token=
-    //NSString *urlString = [@"https://api.instagram.com/v1/users/self/?access_token=" stringByAppendingString:token];
-    //Recent Liked Media
     NSString *urlString = [@"https://api.instagram.com/v1/users/self/media/recent/?access_token=" stringByAppendingString:token];
     NSURL *url = [NSURL URLWithString:urlString];
     
     NSURLSession *session = [NSURLSession sharedSession];
-    
-    //    NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url];
-    //    NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-    //        NSString *text = [[NSString alloc]initWithContentsOfURL:location encoding:NSUTF8StringEncoding error:nil];
-    //        NSLog(@"text: %@", text);
-    //    }];
-    //    [task resume];
-    [[session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+       [[session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
         
         //Check for network error
@@ -91,15 +80,6 @@
             
         }
         self.tableData = [NSMutableArray arrayWithArray:photosUrlArr];
-        
-        //        [[session dataTaskWithURL:imageURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        //            //
-        //            dispatch_async(dispatch_get_main_queue(), ^{
-        ////                self.imageView.image = [UIImage imageWithData:data];
-        ////                self.usernameLabel.text = [NSString stringWithFormat:@"Welcome, %@!", usernameStr];
-        ////                self.fullnameLabel.text = fullnameStr;
-        //            });
-        //        }]resume];
         [self.collectionView reloadData];
     }]resume];
     
@@ -119,6 +99,8 @@
 
     NSURLSession *session = [NSURLSession sharedSession];
     NSURL *url = [NSURL URLWithString:[self.tableData objectAtIndex:indexPath.row]];
+    
+    //Checking if the image is already saved in Documents
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
                                                          NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -134,7 +116,8 @@
             cell.imageView.image = image;
         });
     }else{
-
+        
+    //Download & Save the image
     [[session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
         
@@ -144,6 +127,7 @@
             cell.imageView.image = image;
         });
         
+        //Saving Image in Documents
         NSFileManager *fileManager = [NSFileManager defaultManager];
         NSString * documentsDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         NSLog(@"doc: %@", documentsDirectoryPath);
@@ -156,7 +140,9 @@
             NSLog(@"file doesn't exist");
             //save Image From URL
             
-            [data writeToFile:[documentsDirectoryPath stringByAppendingString:[self.idsArr objectAtIndex:indexPath.row]] options:NSAtomicWrite error:&error];
+            [data writeToFile:[documentsDirectoryPath stringByAppendingPathComponent:[self.idsArr objectAtIndex:indexPath.row]] options:NSAtomicWrite error:&error];
+            NSLog(@"saved successfully in %@",[documentsDirectoryPath stringByAppendingPathComponent:[self.idsArr objectAtIndex:indexPath.row]] );
+
         }else{
             // [self.booksCollectionView reloadData];
             
