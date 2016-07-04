@@ -89,13 +89,13 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fk1-2z-4Aw">
                                 <rect key="frame" x="20" y="67" width="280" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="fullname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gO3-Jx-ZiM">
                                 <rect key="frame" x="20" y="441" width="280" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="R7m-nx-Uce">
@@ -353,6 +353,7 @@
                                 <connections>
                                     <action selector="backButtonPressed:" destination="tto-ku-Mfx" eventType="touchUpInside" id="asl-lS-ERC"/>
                                     <action selector="backButtonPressed:" destination="6pv-bV-Yw1" eventType="touchUpInside" id="oXa-iz-7Ce"/>
+                                    <segue destination="BYZ-38-t0r" kind="modal" identifier="showHome" id="uxf-Fe-HxE"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -382,7 +383,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wHR-Zc-IHc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2279" y="740"/>
+            <point key="canvasLocation" x="2279" y="826"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TOG-iv-zlg">
@@ -410,6 +411,6 @@
         <image name="insta" width="229" height="220"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Opz-VZ-PLu"/>
+        <segue reference="uxf-Fe-HxE"/>
     </inferredMetricsTieBreakers>
 </document>

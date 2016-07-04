@@ -28,6 +28,9 @@
     self.refreshButton.enabled = false;
 
 }
+-(void)viewDidAppear:(BOOL)animated{
+    self.refreshButton.enabled = true;
+}
 - (IBAction)loginButtonPressed:(id)sender {
     [[NXOAuth2AccountStore sharedStore]requestAccessToAccountWithType:@"Instagram"];
     NSArray *instagramAccounts = [[NXOAuth2AccountStore sharedStore] accountsWithAccountType:@"Instagram"];
