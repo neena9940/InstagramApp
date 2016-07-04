@@ -127,7 +127,8 @@
 
 }
 - (IBAction)backButtonPressed:(id)sender {
-    [self performSegueWithIdentifier:@"showHome" sender:nil];
+    //[self performSegueWithIdentifier:@"showHome" sender:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 
 }
 #pragma mark - Collection view data source

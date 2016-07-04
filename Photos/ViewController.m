@@ -17,6 +17,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *fullnameLabel;
 @property (strong, nonatomic)NSString *isFirsttime;
+@property (strong, nonatomic)NSString *usernameStr;
+@property (strong, nonatomic)NSString *fullnameStr;
+
 
 @end
 
@@ -28,20 +31,36 @@
     
     
     self.isFirsttime = [[NSUserDefaults standardUserDefaults]objectForKey:@"isFirstTime"];
-    if([self.isFirsttime isEqualToString:@"NO"] == NO){
-        self.logoutButton.enabled = false;
-        self.refreshButton.enabled = false;
-    }else{
+    self.usernameStr = [[NSUserDefaults standardUserDefaults]objectForKey:@"username"];
+    self.fullnameStr = [[NSUserDefaults standardUserDefaults]objectForKey:@"fullname"];
+
+    if([self.isFirsttime isEqualToString:@"NO"] == YES){
         self.loginButton.enabled = false;
         self.logoutButton.enabled = true;
         self.refreshButton.enabled = true;
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                             NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString* path = [documentsDirectory stringByAppendingPathComponent:
+                          @"profilePhoto" ];
+        
+        self.imageView.image = [UIImage imageWithContentsOfFile:path];
+        self.usernameLabel.text = self.usernameStr;
+        self.fullnameLabel.text = self.fullnameStr;
+
+    }else{
+        self.loginButton.enabled = true;
+        self.logoutButton.enabled = false;
+        self.refreshButton.enabled = false;
+       
     }
     
 
 }
--(void)viewDidAppear:(BOOL)animated{
-    self.refreshButton.enabled = true;
-}
+//-(void)viewDidAppear:(BOOL)animated{
+//    self.refreshButton.enabled = true;
+//}
 - (IBAction)loginButtonPressed:(id)sender {
     [[NXOAuth2AccountStore sharedStore]requestAccessToAccountWithType:@"Instagram"];
     NSArray *instagramAccounts = [[NXOAuth2AccountStore sharedStore] accountsWithAccountType:@"Instagram"];
@@ -49,7 +68,6 @@
         NSLog(@"Warning %ld instagram accounts logged in.", (long)[instagramAccounts count]);
         return;
     }
-    [[NSUserDefaults standardUserDefaults]setObject:@"NO" forKey:@"isFirstTime"];
 
     NXOAuth2Account *acct = instagramAccounts[0];
     NSString *token = acct.accessToken.accessToken;
@@ -61,6 +79,8 @@
     NSURL *url = [NSURL URLWithString:urlString];
     
     NSURLSession *session = [NSURLSession sharedSession];
+    [[NSUserDefaults standardUserDefaults]setObject:@"NO" forKey:@"isFirstTime"];
+
     
     //    NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url];
     //    NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -94,6 +114,9 @@
         NSString *imgURLStr = pkg[@"data"][@"profile_picture"];
         NSString *usernameStr = pkg[@"data"][@"username"];
         NSString *fullnameStr = pkg[@"data"][@"full_name"];
+        [[NSUserDefaults standardUserDefaults]setObject:usernameStr forKey:@"username"];
+        [[NSUserDefaults standardUserDefaults]setObject:fullnameStr forKey:@"fullname"];
+
         NSURL *imageURL = [NSURL URLWithString:imgURLStr];
         // NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
         
@@ -104,6 +127,28 @@
                 self.imageView.image = [UIImage imageWithData:data];
                 self.usernameLabel.text = [NSString stringWithFormat:@"Welcome, %@!", usernameStr];
                 self.fullnameLabel.text = fullnameStr;
+                
+                NSFileManager *fileManager = [NSFileManager defaultManager];
+                NSString * documentsDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                NSLog(@"doc: %@", documentsDirectoryPath);
+                
+                NSString *writablePath = [documentsDirectoryPath stringByAppendingPathComponent:@"profilePhoto"];
+                 NSError *error = nil;
+                if(![fileManager fileExistsAtPath:writablePath]){
+                    // file doesn't exist
+                    
+                    NSLog(@"file doesn't exist");
+                    //save Image From URL
+                    
+                    [data writeToFile:[documentsDirectoryPath stringByAppendingPathComponent:@"profilePhoto"] options:NSAtomicWrite error:&error];
+                }else{
+                    // [self.booksCollectionView reloadData];
+                    
+                    // file exist
+                    NSLog(@"file exists");
+                    
+                }
+
             });
         }]resume];
         
@@ -116,15 +161,20 @@
 
 }
 - (IBAction)logoutButtonPressed:(id)sender {
-    NXOAuth2AccountStore *share = [NXOAuth2AccountStore sharedStore];
-    NSArray *instagramAccounts = [share accountsWithAccountType:@"Instagram"];
-    for(id acct in instagramAccounts){
-        [share removeAccount:acct];
-        
-    }
+//    NXOAuth2AccountStore *share = [NXOAuth2AccountStore sharedStore];
+//    NSArray *instagramAccounts = [share accountsWithAccountType:@"Instagram"];
+//    for(id acct in instagramAccounts){
+//        [share removeAccount:acct];
+//        
+//    }
     self.loginButton.enabled = true;
     self.logoutButton.enabled = false;
     self.refreshButton.enabled = false;
+    self.usernameLabel.text = @"";
+    self.fullnameLabel.text = @"";
+    self.imageView.image = [UIImage imageNamed:@"default"];
+    [[NSUserDefaults standardUserDefaults]setObject:@"YES" forKey:@"isFirstTime"];
+
 
 
 }
